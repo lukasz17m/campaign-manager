@@ -1,0 +1,40 @@
+<mat-card class="campaign-card">
+  <mat-card-header>
+    <mat-card-title>{{campaign.name}}</mat-card-title>
+    <mat-card-subtitle [ngClass]="{ status: true, active: campaign.status }">
+      {{campaign.status ? 'Active' : 'Inactive'}}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-chip-list>
+      <mat-chip *ngFor="let keyword of campaign.keywords">{{keyword}}</mat-chip>
+    </mat-chip-list>
+    <mat-list>
+      <mat-list-item>
+        <mat-icon matListIcon>attach_money</mat-icon>
+        <h3 matLine>Bid Amount</h3>
+        <p matLine>
+          <span>£{{campaign.bidAmount}}</span>
+        </p>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListIcon>settings_input_antenna</mat-icon>
+        <h3 matLine>Range</h3>
+        <p matLine>
+          <span>{{campaign.radius}} km from {{campaign.town}}</span>
+        </p>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListIcon>monetization_on</mat-icon>
+        <h3 matLine>Campaign Fund</h3>
+        <p matLine>
+          <span>£{{campaign.campaignFund}}</span>
+        </p>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button color="primary" mat-raised-button (click)="onEditButtonClick(campaign)">Edit</button>
+    <button color="warn" mat-raised-button (click)="onDeleteButtonClick(campaign)">Delete</button>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,77 @@
+<mat-card *ngIf="campaign">
+  <mat-card-header>
+    <mat-card-title>Edit campaign {{campaign.name}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form id="campaignForm" [formGroup]="campaignForm" (ngSubmit)="saveCampaign()" autocomplete="off">
+      <!-- Name -->
+      <mat-form-field class="form-control">
+        <input matInput placeholder="Campaign name" formControlName="name">
+        <mat-error *ngIf="campaignForm.controls.name.invalid">
+          {{getErrorMessage(campaignForm.controls.name)}}
+        </mat-error>
+      </mat-form-field>
+      <!-- Keywords -->
+      <mat-form-field class="form-control">
+        <mat-chip-list #keywordList>
+          <mat-chip *ngFor="let keyword of keywords" (remove)="removeKeyword(keyword)">
+            {{keyword}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input
+            #keywordsInput
+            matInput
+            placeholder="Add a keyword"
+            formControlName="keywords"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="keywordList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="addKeyword($event)"
+          >
+        </mat-chip-list>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let initialKeyword of filteredInitialKeywords | async" (click)="addFromAutoComplete(initialKeyword)">
+            {{initialKeyword}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <!-- Bid amount -->
+      <mat-form-field class="form-control">
+        <input matInput placeholder="Bid amount" formControlName="bidAmount">
+        <span matPrefix>£&nbsp;</span>
+        <mat-error *ngIf="campaignForm.controls.bidAmount.invalid">
+          {{getErrorMessage(campaignForm.controls.bidAmount)}}
+        </mat-error>
+      </mat-form-field>
+      <!-- Campaign fund -->
+      <mat-form-field class="form-control">
+        <input matInput placeholder="Campaign fund" formControlName="campaignFund">
+        <span matPrefix>£&nbsp;</span>
+        <mat-error *ngIf="campaignForm.controls.campaignFund.invalid">
+          {{getErrorMessage(campaignForm.controls.campaignFund)}}
+        </mat-error>
+      </mat-form-field>
+      <!-- Town -->
+      <mat-form-field class="form-control">
+        <mat-select matInput placeholder="Town" formControlName="town">
+          <mat-option *ngFor="let town of towns" [value]="town">
+            {{town}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- Radius -->
+      <span>Radius (kilometers)</span>
+      <mat-slider  class="form-control" max="1000" min="10" step="1" value="500" thumbLabel formControlName="radius"></mat-slider>
+      <!-- Status -->
+      <mat-radio-group class="radio-btn-group" formControlName="status">
+        <span>Status</span>
+        <mat-radio-button class="radio-btn" value="1">On</mat-radio-button>
+        <mat-radio-button class="radio-btn" value="">Off</mat-radio-button>
+      </mat-radio-group>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button color="primary" mat-raised-button type="submit" form="campaignForm">Save</button>
+    <button color="warn" mat-raised-button (click)="onCancelButtonClick()">Cancel</button>
+  </mat-card-actions>
+</mat-card>

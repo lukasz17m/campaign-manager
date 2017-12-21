@@ -1,0 +1,21 @@
+.active, .active:hover {
+  background-color: #ddd;
+}
+
+.toolbar {
+  display: flex;
+}
+
+.header {
+  margin-right: auto;
+}
+
+.balance {
+  align-items: center;
+  display: inline-flex;
+  margin-left: 1rem;
+
+  &__wallet {
+    margin-right: .5rem;
+  }
+}

@@ -1,0 +1,5 @@
+<app-campaign-item *ngFor="let campaign of campaigns" [campaign]="campaign"></app-campaign-item>
+<mat-card *ngIf="campaigns.length === 0">
+  <p>You don’t have any campaign</p>
+  <p>Add some in <strong><mat-icon class="menu-icon">more_vert</mat-icon>Menu</strong></p>
+</mat-card>
