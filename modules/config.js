@@ -29,8 +29,11 @@ const config = {
     },
     mongoose: {
       database: {
-        host: 'localhost',
-        name: 'campaigns',
+        user: 'setup',
+        password: 'db',
+        host: 'connection',
+        port: 'also',
+        name: 'here',
       },
       options: {
         useMongoClient: true,

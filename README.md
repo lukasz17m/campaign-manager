@@ -1,3 +1,6 @@
+# Live Demo
+<https://ft-campaign-manager.herokuapp.com/>
+
 # CampaignManager
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.1.
